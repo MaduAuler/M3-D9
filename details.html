@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+    <title>E-Commerce</title>
+    <style>
+        .col {
+            max-width: 500px;
+            max-height: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">E-Commerce</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/backoffice.html">Backoffice</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <div class="row " id="card-Wrapper">
+        </div>
+    </div>
+
+
+
+
+
+    <script>
+        const id = (new URLSearchParams(window.location.search)).get("id")
+        const endpoint = "https://striveschool-api.herokuapp.com/api/product/"
+        const row = document.getElementById("card-Wrapper")
+
+        async function fetchEvents() {
+            const response = await fetch("https://striveschool-api.herokuapp.com/api/product/" + id,
+                {
+                    method: "GET",
+                    headers: {
+
+                        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjI4YzJhMjRlYTdiMTAwMTVkMDY3YzkiLCJpYXQiOjE2NDY4Mzg0MzQsImV4cCI6MTY0ODA0ODAzNH0.Hn_Ota-Rg92Ghcp9hG2UJjiUwsLTHXZKjQXCHidbBzA",
+
+                        "Content-Type": "application/json"
+                    },
+
+                })
+            const data = await response.json()
+            console.log(data)
+
+            row.innerHTML =
+
+                `   <div class="col m-2 text-center">
+                    <div class="card second-card-row">
+                    <img src=${data.imageUrl} alt="album1.jpg" class ="mt-2"> 
+                        <div class="card-body">
+                            <p class="card-text">${data.description}</p>
+                            <p class="card-text">${data.brand}</p>
+                            <p class="card-text">${data.price}</p>
+                            
+                        </div>
+                    </div>
+                </div>
+                   `
+
+        }
+
+        window.onload = fetchEvents
+
+    </script>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+        crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
